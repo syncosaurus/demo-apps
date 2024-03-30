@@ -1,3 +1,3 @@
-export const authHandler = async token => {
+export const authHandler = async () => {
   return true
 };
