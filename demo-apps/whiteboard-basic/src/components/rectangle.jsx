@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSubscribe } from '../../../../syncosaurus/hooks';
+import { useSubscribe } from 'syncosaurus';
 
 const Rectangle = ({ id, onShapePointerDown, synco }) => {
   const [selectedByMe, setSeletedByMe] = useState(false);

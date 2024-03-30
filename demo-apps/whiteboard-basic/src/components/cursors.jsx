@@ -1,7 +1,7 @@
 import {
   usePresence,
   useUpdateMyPresence,
-} from '../../../../syncosaurus/hooks';
+} from 'syncosaurus';
 
 import Cursor from './cursor';
 
