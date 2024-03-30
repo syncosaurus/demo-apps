@@ -1,13 +1,9 @@
 import './App.css';
 import { useState } from 'react';
-import { mutators } from '../../../../syncosaurus/mutators.js';
-// import {
-//   usePresence,
-//   useUpdateMyPresence,
-// } from '../../../syncosaurus/hooks.js';
-import Syncosaurus from '../../../../syncosaurus/syncosaurus.js';
 import { v4 as uuidv4 } from 'uuid';
-import { useSubscribe } from '../../../../syncosaurus/hooks.js';
+import Syncosaurus from 'syncosaurus';
+import { useSubscribe } from 'syncosaurus';
+import mutators from '../mutators.js';
 
 // TODO MOVE THIS ELSEWHERE
 class User {
@@ -22,6 +18,7 @@ const user = new User();
 const synco = new Syncosaurus({
   mutators,
   userID: user.id,
+  server: import.meta.env.VITE_DO_URL
 });
 
 const roomID = 'eIBMeQwHNDhnm5NSetIJ/kn17q8=';
