@@ -1,4 +1,5 @@
-export const mutators = {
+// this is an example mutators implementation that will eventually be removed
+export default {
   increment,
   decrement,
   addTodo,
@@ -9,14 +10,12 @@ export const mutators = {
 
 //Mutators for the counter application
 async function increment(tx, { key, delta }) {
-  console.log(`incrementing ${key} by ${delta}`);
   const prev = tx.get(key);
   const next = (prev ?? 0) + delta;
   tx.set(key, next);
 }
 
 async function decrement(tx, { key, delta }) {
-  console.log(`decrementing ${key} by ${delta}`);
   const prev = tx.get(key);
   const next = (prev ?? 0) - delta;
   tx.set(key, next);

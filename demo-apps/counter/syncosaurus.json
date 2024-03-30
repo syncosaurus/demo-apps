@@ -1,0 +1,10 @@
+
+  {
+    "projectName": "counter",
+    "compatibilityDate": "2024-03-30",
+    "encryption": false,
+    "authentication": false,
+    "serverMsgFrequency": 16,
+    "enableRoomStorage": false
+  }
+  
