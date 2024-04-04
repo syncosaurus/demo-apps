@@ -5,7 +5,7 @@ export function Droppable({ id, cell, children }) {
     id,
   })
   const style = {
-    color: isOver ? 'green' : undefined,
+    backgroundColor: isOver ? 'green' : 'grey',
     height: 100,
     width: 100,
     border: '1px solid black',
