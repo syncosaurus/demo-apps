@@ -18,14 +18,11 @@ function createBoard({ height, width }) {
 
 function BoardVertical({ rows }) {
   return (
-    <DndContext>
-      <Draggable id={1} />
-      <Stack>
-        {rows.map((row, idx) => {
-          return <BoardRow key={idx} row={row} />
-        })}
-      </Stack>
-    </DndContext>
+    <Stack>
+      {rows.map((row, idx) => {
+        return <BoardRow key={idx} row={row} />
+      })}
+    </Stack>
   )
 }
 
@@ -45,7 +42,18 @@ function Board({ height, width }) {
     setBoard(createBoard({ height, width }))
   }, [height, width])
 
-  return <BoardVertical rows={board} />
+  const handleDragEnd = e => {
+    if (e.over && e.over.id && e.active.id === e.over.id) {
+      console.log('success!')
+    }
+  }
+
+  return (
+    <DndContext onDragEnd={handleDragEnd}>
+      <Draggable id={1} />
+      <BoardVertical rows={board} />
+    </DndContext>
+  )
 }
 
 export default Board
