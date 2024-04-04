@@ -10,7 +10,7 @@ import mutators from './mutators.js'
 import Cursors from './components/cursors.jsx'
 
 
-const synco = new Syncosaurus({mutators, userID: String(Math.random()), server: import.meta.env.VITE_DO_URL})
+const synco = new Syncosaurus({mutators, userID: String(Math.random()), server: 'ws://localhost:8787'})
 
 function App() {
   const count = useSubscribe(synco, (tx) => tx.get('count'), 0)
