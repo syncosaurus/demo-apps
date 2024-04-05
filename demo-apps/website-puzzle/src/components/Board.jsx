@@ -74,7 +74,7 @@ function Board({ height, width }) {
 
   const handleDragEnd = e => {
     const piece = freePieces.find(piece => piece.id === e.active.id)
-
+    if (piece === undefined) return
     if (e.over === null || e.active.id !== e.over.id) {
       piece.position.x += e.delta.x
       piece.position.y += e.delta.y
