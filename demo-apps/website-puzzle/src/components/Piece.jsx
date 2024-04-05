@@ -5,15 +5,23 @@ import { CSS } from '@dnd-kit/utilities'
 export function Piece({ id, children, styles, synco }) {
   const getPiece = tx => tx.get(String(id))
   const params = useSubscribe(synco, getPiece, {
-    x: 0,
-    y: 0,
-    scaleX: 1,
-    scaleY: 1,
+    position: {
+      x: 0,
+      y: 0,
+      scaleX: 1,
+      scaleY: 1,
+    },
+    placed: false,
   })
 
-  const syncoPosition = {
-    left: `${params.x}px`,
-    top: `${params.y}px`,
+  let syncoPosition
+  if (!params.placed) {
+    syncoPosition = {
+      left: `${params.position.x}px`,
+      top: `${params.position.y}px`,
+    }
+  } else {
+    syncoPosition = {}
   }
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({

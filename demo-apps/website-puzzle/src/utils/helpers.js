@@ -25,6 +25,7 @@ export function createPieces(num) {
         scaleX: 1,
         scaleY: 1,
       },
+      placed: false,
     })
   }
   return pieces
