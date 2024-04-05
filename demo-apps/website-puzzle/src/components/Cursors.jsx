@@ -27,7 +27,9 @@ const Cursors = ({ synco }) => {
             key={id}
             className="cursorContainer"
             style={{
+              position: 'absolute',
               transform: `translate(${x}px, ${y}px)`,
+              zIndex: 100,
             }}
           >
             <Cursor fill={cursorColors[idx]} />

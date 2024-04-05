@@ -18,9 +18,10 @@ function Board({ height, width, synco }) {
     const piece = freePieces.find(piece => piece.id === e.active.id)
     if (piece === undefined) return
     if (e.over === null || e.active.id !== e.over.id) {
-      piece.position.x += e.delta.x
-      piece.position.y += e.delta.y
-      setFreePieces([...freePieces])
+      const x = e.delta.x
+      const y = e.delta.y
+      synco.mutate.movePiece({ id: piece.id, delta: { x, y } })
+      // setFreePieces([...freePieces])
       return
     }
 
@@ -36,6 +37,7 @@ function Board({ height, width, synco }) {
         <Piece
           key={piece.id}
           id={piece.id}
+          className="puzzle-piece"
           styles={{
             position: 'absolute',
             left: `${piece.position.x}px`,

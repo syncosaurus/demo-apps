@@ -10,19 +10,26 @@ export function Piece({ id, children, styles, synco }) {
     scaleX: 1,
     scaleY: 1,
   })
+
+  const syncoPosition = {
+    left: `${params.x}px`,
+    top: `${params.y}px`,
+  }
+
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: id,
   })
-  console.log(id, params)
+
   const style = {
     transform: CSS.Translate.toString(transform),
     height: 100,
     width: 100,
+    zIndex: 5,
   }
   return (
     <button
       ref={setNodeRef}
-      style={{ ...style, ...styles, ...params }}
+      style={{ ...style, ...styles, ...syncoPosition }}
       {...listeners}
       {...attributes}
     >
