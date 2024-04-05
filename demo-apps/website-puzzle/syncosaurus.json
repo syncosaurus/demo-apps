@@ -1,0 +1,11 @@
+
+  {
+    "projectName": "puzzle",
+    "compatibilityDate": "2024-04-05",
+    "encryption": false,
+    "authentication": false,
+    "msgFrequency": 16,
+    "useStorage": false,
+    "autosaveInterval": 30000
+  }
+  
