@@ -16,7 +16,7 @@ function createBoard({ height, width }) {
   return board
 }
 
-function BoardVertical({ rows }) {
+function RowGenerator({ rows }) {
   return (
     <Stack>
       {rows.map((row, idx) => {
@@ -38,20 +38,31 @@ function BoardRow({ row }) {
 
 function Board({ height, width }) {
   const [board, setBoard] = useState([])
+  const [freePieces, setFreePieces] = useState([<Draggable key={1} id={1} />])
+  const [placedPieces, setPlacedPieces] = useState([])
+
   useEffect(() => {
     setBoard(createBoard({ height, width }))
   }, [height, width])
 
   const handleDragEnd = e => {
-    if (e.over && e.over.id && e.active.id === e.over.id) {
+    const currPieceId = e.active.id
+    const overCellId = e.over.id
+    if (overCellId && currPieceId.id === overCellId.id) {
       console.log('success!')
+      setFreePieces(prev => {
+        return prev.filter(ele => ele.props.id !== currPieceId)
+      })
+      setPlacedPieces(prev =>
+        prev.concat(freePieces.find(piece => piece.props.id === currPieceId))
+      )
     }
   }
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <Draggable id={1} />
-      <BoardVertical rows={board} />
+      {freePieces.map(piece => piece)}
+      <RowGenerator rows={board} placedPieces={placedPieces} />
     </DndContext>
   )
 }
