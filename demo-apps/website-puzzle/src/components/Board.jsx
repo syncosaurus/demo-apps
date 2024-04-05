@@ -9,28 +9,43 @@ function createBoard({ height, width }) {
   for (let i = 0; i < height; i++) {
     let currRow = []
     for (let j = 0; j < width; j++) {
-      currRow[j] = { parent: null, id: width * i + j }
+      currRow[j] = { parent: null, id: width * i + j + 1 }
     }
     board[i] = currRow
   }
   return board
 }
 
-function RowGenerator({ rows }) {
+function createPieces(num) {
+  let pieces = []
+  for (let i = 1; i <= num; i++) {
+    pieces.push({ id: i })
+  }
+  return pieces
+}
+
+function RowGenerator({ rows, placedPieces }) {
   return (
     <Stack>
       {rows.map((row, idx) => {
-        return <BoardRow key={idx} row={row} />
+        return <BoardRow key={idx} row={row} placedPieces={placedPieces} />
       })}
     </Stack>
   )
 }
 
-function BoardRow({ row }) {
+function BoardRow({ row, placedPieces }) {
   return (
     <Stack direction="horizontal">
       {row.map(cell => {
-        return <Droppable id={cell.id} key={cell.id} cell={cell} />
+        const matchingPiece = placedPieces.find(piece => piece.id === cell.id)
+        return (
+          <Droppable id={cell.id} key={cell.id} cell={cell}>
+            {matchingPiece && (
+              <Draggable key={matchingPiece.id} id={matchingPiece.id} />
+            )}
+          </Droppable>
+        )
       })}
     </Stack>
   )
@@ -38,7 +53,7 @@ function BoardRow({ row }) {
 
 function Board({ height, width }) {
   const [board, setBoard] = useState([])
-  const [freePieces, setFreePieces] = useState([<Draggable key={1} id={1} />])
+  const [freePieces, setFreePieces] = useState(createPieces(9))
   const [placedPieces, setPlacedPieces] = useState([])
 
   useEffect(() => {
@@ -48,20 +63,21 @@ function Board({ height, width }) {
   const handleDragEnd = e => {
     const currPieceId = e.active.id
     const overCellId = e.over.id
-    if (overCellId && currPieceId.id === overCellId.id) {
-      console.log('success!')
+    if (overCellId && currPieceId === overCellId) {
       setFreePieces(prev => {
-        return prev.filter(ele => ele.props.id !== currPieceId)
+        return prev.filter(piece => piece.id !== currPieceId)
       })
       setPlacedPieces(prev =>
-        prev.concat(freePieces.find(piece => piece.props.id === currPieceId))
+        prev.concat(freePieces.find(piece => piece.id === currPieceId))
       )
     }
   }
 
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      {freePieces.map(piece => piece)}
+      {freePieces.map(piece => (
+        <Draggable key={piece.id} id={piece.id} />
+      ))}
       <RowGenerator rows={board} placedPieces={placedPieces} />
     </DndContext>
   )

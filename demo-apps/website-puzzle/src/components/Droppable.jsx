@@ -13,7 +13,6 @@ export function Droppable({ id, cell, children }) {
 
   return (
     <div ref={setNodeRef} style={style}>
-      {cell.id}
       {children}
     </div>
   )
