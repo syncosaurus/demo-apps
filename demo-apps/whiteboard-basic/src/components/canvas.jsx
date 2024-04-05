@@ -10,7 +10,6 @@ import Rectangle from './rectangle';
 import Cursors from './cursors.jsx';
 
 const getShapeIds = tx => tx.get('shapeIds');
-console.log(import.meta.env.VITE_DO_URL)
 const synco = new Syncosaurus({ mutators, userID: uuidv4(), server: import.meta.env.VITE_DO_URL });
 
 const Canvas = () => {
