@@ -1,6 +1,6 @@
 import Stack from 'react-bootstrap/Stack'
 import { Droppable } from './Droppable'
-import { Draggable } from './Draggable'
+import { Piece } from './Piece'
 
 function BoardRow({ row, placedPieces }) {
   return (
@@ -10,7 +10,7 @@ function BoardRow({ row, placedPieces }) {
         return (
           <Droppable id={cell.id} key={cell.id} cell={cell}>
             {matchingPiece && (
-              <Draggable key={matchingPiece.id} id={matchingPiece.id} />
+              <Piece key={matchingPiece.id} id={matchingPiece.id} />
             )}
           </Droppable>
         )

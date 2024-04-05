@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { DndContext } from '@dnd-kit/core'
 import { createBoard, createPieces } from '../utils/helpers'
 import RowGenerator from './RowGenerator'
-import { Draggable } from './Draggable'
+import { Piece } from './Piece'
 
-function Board({ height, width }) {
+function Board({ height, width, synco }) {
   const [board, setBoard] = useState([])
   const [freePieces, setFreePieces] = useState(createPieces(9))
   const [placedPieces, setPlacedPieces] = useState([])
@@ -33,7 +33,7 @@ function Board({ height, width }) {
   return (
     <DndContext onDragEnd={handleDragEnd}>
       {freePieces.map(piece => (
-        <Draggable
+        <Piece
           key={piece.id}
           id={piece.id}
           styles={{
@@ -41,6 +41,7 @@ function Board({ height, width }) {
             left: `${piece.position.x}px`,
             top: `${piece.position.y}px`,
           }}
+          synco={synco}
         />
       ))}
       <RowGenerator rows={board} placedPieces={placedPieces} />
